@@ -1,105 +1,135 @@
-<br />
 <div align="center">
-  <a href="https://luminaai.tech">
-    <img src="public/logo0.png" alt="Logo" width="80" height="80">
-  </a>
 
-<h3 align="center">LUMINA AI</h3>
+# 🌌 Lumina AI — Multi-Modal AI Generation Platform
 
-  <p align="center">
-    An open source Saas platform to help users to use many AI tools such as AI assistant , image, code, music and video generation in one platform.
-    <br />
-    <a href="https://luminaai.tech">View Demo</a>
-    ·
-    <a href="https://github.com/Tusharknwl/Lumina_AI/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/Tusharknwl/Lumina_AI/issues">Request Feature</a>
-  </p>
+[![Next.js](https://img.shields.io/badge/Next.js%2013-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com)
+[![Replicate](https://img.shields.io/badge/Replicate-000000?style=for-the-badge&logo=replicate&logoColor=white)](https://replicate.com)
+[![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.dev)
+[![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-luminaai.tech-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://luminaai.tech)
+
+> **5-in-1 Multi-Modal AI SaaS** — One platform for AI conversation, image generation, code generation, music creation, and video generation — with a token credit system and Stripe billing.
+
 </div>
 
-## About The Project
-![Lumina AI banner](/public/banner.png)
+---
 
-Lumina AI is a SaaS-based AI platform built with Next.js, Shadcn, Tailwind CSS, Clerk, and the OpenAI API. It offers various AI-powered features such as AI chat assistant, image generation, code generation,video and music generation.
+## ✨ AI Tools Included
 
-## Table of Contents
-- [Features](#features)
-- [Demo](#demo)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
-- [License](#license)
+| Tool | Model | Description |
+|------|-------|-------------|
+| 💬 **AI Conversation** | GPT-4 | Intelligent chat with context memory |
+| 🎨 **Image Generation** | DALL-E 3 | Text-to-image with style controls |
+| 💻 **Code Generation** | GPT-4 Code | Multi-language code generation & explanation |
+| 🎵 **Music Generation** | Replicate (MusicGen) | Text-to-music with genre controls |
+| 🎬 **Video Generation** | Replicate (Zeroscope) | Text-to-video clips |
 
-## Features
+---
 
-Lumina AI comes with a wide range of AI-powered features, including:
+## 🏗️ Architecture
 
-- **Chatbot**: A AI chatbot that can answer user queries.
-- **Image Generation**: Generate stunning images using AI.
-- **Code Generation**: Automatically generate code snippets based on user requirements.
-- **Video**: Generate a video clip based on user input.
-- **Music Generation**: Generate music beat based on user input.
+```
+User Request → Clerk Auth → Credit Check → AI API (OpenAI/Replicate) → Response
+     ↓
+Credit System: MySQL (Prisma) → Usage tracking → Stripe for top-ups
+     ↓
+Frontend: Next.js 13 App Router → Shadcn/UI → Tailwind CSS
+```
 
-## Demo
+## 🛠️ Tech Stack
 
-Visit our [Lumina.AI](https://lumina-ai-one.vercel.app/)
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | Next.js 13 (App Router), TypeScript, Tailwind CSS, Shadcn/UI |
+| **AI - Text/Code** | OpenAI GPT-4 (gpt-4, gpt-3.5-turbo) |
+| **AI - Image** | OpenAI DALL-E 3 |
+| **AI - Audio/Video** | Replicate API (MusicGen, Zeroscope V2) |
+| **Auth** | Clerk (social login, email, JWT) |
+| **Database** | MySQL + Prisma ORM |
+| **Payments** | Stripe + Webhooks |
+| **Rate Limiting** | Custom credit token system |
+| **Deployment** | Vercel |
 
-## Installation
+## 🚀 Getting Started
 
-To get started with Lumina AI, follow these steps:
+```bash
+# Clone the repo
+git clone https://github.com/Asim-Shahani/Lumina_AI.git
+cd Lumina_AI
 
-1. Clone this repository:
-   ```shell
-   git clone https://github.com/Tusharknwl/Lumina_AI.git
+# Install dependencies
+npm install
 
-2. Change to the project directory:
-    ```shell
-    cd Lumina_AI
+# Set up environment variables
+cp .env.example .env
+# Fill in all required keys (see below)
 
-3. Install dependencies:
-    ```shell
-    npm install
+# Set up the database
+npx prisma db push
 
-4. Configure your environment variables. Refer to the [Configuration](#configuration) section for details.
+# Run the development server
+npm run dev
+```
 
-5. Start the development server:
-    ```shell
-    npm run dev
+## 🔑 Environment Variables
 
-6. Open your web browser and navigate to http://localhost:3000 to access the application.
+```env
+# Clerk Auth
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
 
+# OpenAI
+OPENAI_API_KEY=
 
-## Configuration
+# Replicate
+REPLICATE_API_TOKEN=
 
-To configure Lumina AI, you'll need to set the following environment variables:
+# Database
+DATABASE_URL=
 
-- **NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY**: Your Clerk Publishable Key.
-- **CLERK_SECRET_KEY**: Your Clerk Secret Key.
-- **NEXT_PUBLIC_CLERK_SIGN_IN_URL**: The URL for user sign-in (e.g., `/sign-in`).
-- **NEXT_PUBLIC_CLERK_SIGN_UP_URL**: The URL for user sign-up (e.g., `/sign-up`).
-- **NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL**: The URL users are redirected to after signing in (e.g., `/dashboard`).
-- **NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL**: The URL users are redirected to after signing up (e.g., `/dashboard`).
-- **OPENAI_API_KEY**: Your OpenAI API Key.
-- **REPLICATE_API_TOKEN**: Your Replicate API Token.
+# Stripe
+STRIPE_API_KEY=
+STRIPE_WEBHOOK_SECRET=
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
 
-Create a `.env` file in the project root directory and define these variables as follows:
+## 💡 Key Implementation Details
 
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-    CLERK_SECRET_KEY=your_clerk_secret_key
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
-    OPENAI_API_KEY=your_openai_api_key
-    REPLICATE_API_TOKEN=your_replicate_api_token
+### Credit Token System
+- New users receive **10 free API calls** across all tools
+- Each generation consumes **1 credit token**
+- Pro subscription unlocks **unlimited generations**
+- Credits tracked in MySQL via Prisma, checked on every API call
 
-## Contributing
+### Multi-Model Integration
+The platform uses a **unified API gateway pattern**:
+- `/api/conversation` → OpenAI Chat Completions
+- `/api/image` → DALL-E 3 via OpenAI Images API
+- `/api/code` → OpenAI with system prompt for code specialist role
+- `/api/music` → Replicate MusicGen
+- `/api/video` → Replicate Zeroscope V2
 
-We welcome contributions from the community. Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+### Stripe Integration
+- **Pro Plan**: $20/month unlimited access
+- Webhooks handle: `checkout.session.completed`, `invoice.payment_succeeded`, `customer.subscription.deleted`
+- Automatic user tier upgrade/downgrade on webhook events
 
-Please make sure to update tests as appropriate.
+## 🌐 Live Demo
 
+Visit **[luminaai.tech](https://luminaai.tech)** to see all 5 AI tools in action.
 
-## 🔗 Links
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://tusharknwl.github.io/portfolio-2021)
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tushar-khanagwal/)
+---
+
+<div align="center">
+
+Built with ❤️ by [Asim Shahani](https://github.com/Asim-Shahani) | AI Engineer
+
+⭐ Star this repo if you find it helpful!
+
+</div>
